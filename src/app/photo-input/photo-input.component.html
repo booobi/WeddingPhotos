@@ -1,0 +1,18 @@
+<div>
+  <button (click)="onFileSelectionTrigger()" class="button">
+    <span class="icon">
+      <i class="fa-solid fa-upload"></i>
+    </span>
+    <span>Upload</span>
+  </button>
+</div>
+<p>or</p>
+<div>
+  <button class="button">
+    <span class="icon">
+      <i class="fa-solid fa-camera"></i> </span
+    ><span>Take a Photo!</span>
+  </button>
+</div>
+
+<input type="file" class="file-input" onclick="value = null" #fileInput (change)="onFilesSelected($event)">

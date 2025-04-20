@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder,  ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FileInputComponent } from '../file-input/file-input.component';
+import { PhotoInputComponent } from '../photo-input/photo-input.component';
 
 
 @Component({
   selector: 'app-photo-submission',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FileInputComponent],
+  imports: [CommonModule, ReactiveFormsModule, PhotoInputComponent],
   templateUrl: './photo-submission.component.html',
   styleUrls: ['./photo-submission.component.scss']
 })
