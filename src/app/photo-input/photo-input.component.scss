@@ -1,10 +1,23 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
     p {
         color: #555;
-        margin: 10px;
       }
 
       .file-input {
         display: none;
+      }
+
+      swiper-container {
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+      }
+      .swiper-image {
+        // height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
       }
 }
