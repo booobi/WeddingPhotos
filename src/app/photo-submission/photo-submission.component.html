@@ -2,11 +2,12 @@
   <h1>Share Your Wedding Pics!</h1>
   <p>Upload a photo for the happy couple to cherish forever 💖</p>
   <app-photo-input />
-  @if (store.hasStagedFiles() && !store.isUploadingFiles()) {
-  <button class="button is-primary" (click)="store.uploadStagedFiles()">Upload selected photos</button>
+  @if (store.hasStagedFiles()) {
+  <button class="button is-primary"  [class.is-loading]="store.isUploadingFiles()"
+    (click)="store.uploadStagedFiles()">{{store.isUploadingFiles() ? 'Uploading...' : 'Upload selected photos'}}</button>
   }
 
-  @if (store.isUploadingFiles()) {
-  <progress class="progress is-small is-primary" max="100">15%</progress>
-  }
+  <!-- @if (store.isUploadingFiles()) {
+  <progress class="progress is-small is-primary"  max="100">15%</progress>
+  } -->
 </div>

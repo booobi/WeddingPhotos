@@ -8,8 +8,10 @@ import {
   viewChild,
 } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { fromEvent, pipe, switchMap, tap } from 'rxjs';
+import { fromEvent, merge, pipe, switchMap, tap } from 'rxjs';
 import { PhotoInputStore } from './photo-input.store';
+import { CommonModule } from '@angular/common';
+import { StagedPhotoComponent } from './staged-photo/staged-photo.component';
 
 @Component({
   selector: 'app-photo-input',
@@ -17,6 +19,7 @@ import { PhotoInputStore } from './photo-input.store';
   styleUrls: ['./photo-input.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
+  imports: [CommonModule, StagedPhotoComponent]
 })
 export class PhotoInputComponent implements OnInit {
   store = inject(PhotoInputStore);
@@ -24,7 +27,13 @@ export class PhotoInputComponent implements OnInit {
   stageFilesSelectionEffect = rxMethod<void>(
     pipe(
       switchMap(() =>
-        fromEvent<Event>(this.fileInput()?.nativeElement, 'change')
+        merge(
+          fromEvent<Event>(this.fileInput()?.nativeElement, 'change'),
+          fromEvent<Event>(
+            this.cameraInput()?.nativeElement,
+            'change'
+          )
+        )
       ),
       tap((changeEv: Event) => {
         this.store.stageFiles(
@@ -42,7 +51,6 @@ export class PhotoInputComponent implements OnInit {
 
   public cameraInput = viewChild<ElementRef>('cameraInput');
 
-
   public onCameraTrigger() {
     this.cameraInput()?.nativeElement?.click();
   }
@@ -51,11 +59,7 @@ export class PhotoInputComponent implements OnInit {
     this.fileInput()?.nativeElement?.click();
   }
 
-  public onFilesSelected(event: any) {
-    console.log('onFileSelected', { event });
-  }
-
-  onFileUploaded(event: any) {
-    console.log('onFileUploaded', { event });
+  public onPhotoRemove(index: number) {
+    this.store.removeStagedFile(index);
   }
 }

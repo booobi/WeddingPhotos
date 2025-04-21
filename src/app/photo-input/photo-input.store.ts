@@ -10,10 +10,11 @@ import {
 export interface PhotoInputState {
   stagedFiles: any[];
   isUploadingFiles: boolean;
+  uploadStatus: 'success' | 'error' | null;
 }
 
 export const PhotoInputStore = signalStore(
-  withState(<PhotoInputState>{ isUploadingFiles: false, stagedFiles: [] }),
+  withState(<PhotoInputState>{ isUploadingFiles: false, stagedFiles: [], uploadStatus: null }),
   withComputed(({ stagedFiles }) => ({
     stagedFileUrls: computed(() => stagedFiles().map(URL.createObjectURL)),
     hasStagedFiles: computed(() => !!stagedFiles().length),
@@ -33,7 +34,7 @@ export const PhotoInputStore = signalStore(
     uploadStagedFiles() {
       patchState(store, { isUploadingFiles: true });
       setTimeout(() => {
-        patchState(store, { isUploadingFiles: false });
+        patchState(store, { isUploadingFiles: false, stagedFiles: [], uploadStatus: 'success' });
       }, 2000)
     }
   }))

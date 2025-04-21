@@ -3,7 +3,7 @@
   padding: 0;
   background-color: #fff0f5;
   display: block;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .container {
@@ -34,6 +34,10 @@ button {
   margin-top: 8px;
   background-color: #e91e63;
   color: white;
+}
+
+.progress {
+  margin-top: 8px;
 }
 
 progress {

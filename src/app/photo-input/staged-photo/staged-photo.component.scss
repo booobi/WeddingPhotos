@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    height: 100%;
+    position: relative;
+
+    .staged-photo-container {
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border-radius: 8px;
+    }
+
+    .remove-btn {
+        position: absolute;
+        bottom: 26px;
+        left: calc(50% - 20px);
+    }
+}

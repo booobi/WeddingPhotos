@@ -18,13 +18,19 @@
 <input type="file" class="file-input" accept="image/*" capture #cameraInput>
 
 @if (store.hasStagedFiles()) {
-  <p>Selected photo(s):</p>
+<p>Selected photo(s):</p>
 } @else {
-  <p>Select some photos to upload!</p> 
+  @if(store.uploadStatus() === 'success') {
+    <p class="has-text-success">
+      <i class="fa-solid fa-circle-check"></i>
+      Photos uploaded! Thank you! Feel free to upload more.
+    </p>    
+  }
+  @else {<p>Select some photos to upload!</p>}
 }
 
 <swiper-container #swiperEl pagination="true" effect="coverflow" navigation="true">
   @for (imgUrl of store.stagedFileUrls(); track $index) {
-  <swiper-slide> <img class="swiper-image" [src]="imgUrl"></swiper-slide>
+  <swiper-slide><app-staged-photo [imageSrc]="imgUrl" (remove)="onPhotoRemove($index)" /></swiper-slide>
   }
 </swiper-container>
