@@ -35,3 +35,7 @@ button {
   background-color: #e91e63;
   color: white;
 }
+
+progress {
+  --bulma-progress-value-background-color: #e91e63 !important;
+}

@@ -34,27 +34,18 @@ export class PhotoInputComponent implements OnInit {
     )
   );
 
-  // addStagedFilesToSwiper = rxMethod<string[]>(
-  //   pipe(
-  //     tap((fileUrls) => {
-  //       const diff = fileUrls.filter((url) =>
-  //         this.store.stagedFileUrls().includes(url)
-  //       );
-  //       console.log({diff, el: this.swiperEl()})
-  //       this.swiperEl()?.nativeElement.swiper.addSlide(1, diff.map(d => `<swiper-slide> <img class="swiper-image" src="${d}"></swiper-slide>`));
-  //     })
-  //   )
-  // );
-
   ngOnInit() {
     this.stageFilesSelectionEffect();
-    // this.addStagedFilesToSwiper(this.store.stagedFileUrls);
-    console.log(this.store);
   }
 
   public fileInput = viewChild<ElementRef>('fileInput');
 
-  private swiperEl = viewChild<ElementRef>('swiperEl');
+  public cameraInput = viewChild<ElementRef>('cameraInput');
+
+
+  public onCameraTrigger() {
+    this.cameraInput()?.nativeElement?.click();
+  }
 
   public onFileSelectionTrigger() {
     this.fileInput()?.nativeElement?.click();

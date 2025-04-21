@@ -1,6 +1,12 @@
 <div class="container">
-    <h1>Share Your Wedding Pics!</h1>
-    <p>Upload a photo for the happy couple to cherish forever 💖</p>
-    <app-photo-input/>
-    <button class="button is-primary">Upload selected photos</button>
-  </div>
+  <h1>Share Your Wedding Pics!</h1>
+  <p>Upload a photo for the happy couple to cherish forever 💖</p>
+  <app-photo-input />
+  @if (store.hasStagedFiles() && !store.isUploadingFiles()) {
+  <button class="button is-primary" (click)="store.uploadStagedFiles()">Upload selected photos</button>
+  }
+
+  @if (store.isUploadingFiles()) {
+  <progress class="progress is-small is-primary" max="100">15%</progress>
+  }
+</div>

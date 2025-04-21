@@ -16,6 +16,7 @@ export const PhotoInputStore = signalStore(
   withState(<PhotoInputState>{ isUploadingFiles: false, stagedFiles: [] }),
   withComputed(({ stagedFiles }) => ({
     stagedFileUrls: computed(() => stagedFiles().map(URL.createObjectURL)),
+    hasStagedFiles: computed(() => !!stagedFiles().length),
   })),
   withMethods((store) => ({
     stageFiles(files: File[]): void {
@@ -29,5 +30,11 @@ export const PhotoInputStore = signalStore(
     removeAllStagedFiles() {
       patchState(store, { stagedFiles: [] });
     },
+    uploadStagedFiles() {
+      patchState(store, { isUploadingFiles: true });
+      setTimeout(() => {
+        patchState(store, { isUploadingFiles: false });
+      }, 2000)
+    }
   }))
 );
