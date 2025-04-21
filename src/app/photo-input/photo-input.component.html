@@ -8,7 +8,7 @@
   <p>or</p>
   <button (click)="onCameraTrigger()" class="button">
     <span class="icon">
-      <i class="fa-solid fa-camera"></i> </span><span>Take a Photo!</span>
+      <i class="fa-solid fa-camera"></i> </span><span>Take a Photo</span>
   </button>
 </div>
 
@@ -19,12 +19,12 @@
 <p>Selected photo(s):</p>
 } @else {
   @if(store.uploadStatus() === 'success') {
-    <p class="has-text-success">
+    <p class="info-text has-text-success">
       <i class="fa-solid fa-circle-check"></i>
       Photos uploaded! Thank you! Feel free to upload more.
     </p>    
   }
-  @else {<p>Select some photos to upload!</p>}
+  @else {<p class="info-text">Select some photos to get started!</p>}
 }
 
 <swiper-container #swiperEl pagination="true" effect="coverflow" navigation="true">
