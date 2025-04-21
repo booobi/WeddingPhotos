@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
+import { FullpageNavigatorService } from './services/fullpage-navigator.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PhotoGalleryComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
   title = 'wedding-table-photos';
 
+  navigator = inject(FullpageNavigatorService);
+
   ngOnInit(): void {
-    new (window as any).fullpage('#fullpage', {
-      autoScrolling:true,
-      scrollHorizontally: true
-  });
+    this.navigator.initialize('#fullpage');
   }
 }
