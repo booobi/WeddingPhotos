@@ -1,8 +1,13 @@
-<div class="container">
-  <a class="is-text" (click)="navigator.navigateUp()">
-    <div class="to-upload-button">
-      <i class="fa-solid fa-arrow-up"></i>
-      <span>To Photo Upload</span>
-    </div>
-  </a>
-</div>
+<a class="is-text" (click)="navigator.navigateUp()">
+  <div class="to-upload-button">
+    <i class="fa-solid fa-arrow-up"></i>
+    <span>To Photo Upload</span>
+  </div>
+</a>
+
+<ngx-masonry [options]="masonryOptions">
+  <div class="grid-sizer"></div>
+  <div ngxMasonryItem class="grid-item" *ngFor="let url of imageUrls">
+    <img [src]="url">
+  </div>
+</ngx-masonry>

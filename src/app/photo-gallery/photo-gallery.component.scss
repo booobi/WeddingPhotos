@@ -9,4 +9,22 @@
         align-items: center;
         justify-content: center;
       }
+
+      ngx-masonry {
+        margin-top: 10px;
+
+      }
+
+      .grid-sizer,
+      .grid-item {
+        width: 45%; /* Two columns */
+      }
+      
+      .grid-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 8px;
+        border-radius: 8px;
+      }
 }
