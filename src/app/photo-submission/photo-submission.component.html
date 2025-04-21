@@ -7,7 +7,12 @@
     (click)="store.uploadStagedFiles()">{{store.isUploadingFiles() ? 'Uploading...' : 'Upload selected photos'}}</button>
   }
 
-  <!-- @if (store.isUploadingFiles()) {
-  <progress class="progress is-small is-primary"  max="100">15%</progress>
-  } -->
+
+
+<a class=" is-text">
+  <div class="gallery-button">
+    <span>To Gallery</span>
+    <i class="fa-solid fa-arrow-down"></i>
+  </div>
+</a>
 </div>

@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhotoInputComponent } from '../photo-input/photo-input.component';
 import { PhotoInputStore } from '../photo-input/photo-input.store';
-
 
 @Component({
   selector: 'app-photo-submission',
@@ -12,15 +11,14 @@ import { PhotoInputStore } from '../photo-input/photo-input.store';
   styleUrls: ['./photo-submission.component.scss'],
   providers: [PhotoInputStore],
 })
-export class PhotoSubmissionComponent {
+export class PhotoSubmissionComponent implements OnInit {
   store = inject(PhotoInputStore);
 
+  ngOnInit(): void {}
+
   onUpload(s: any) {
-    console.log({s})
-
+    console.log({ s });
   }
 
-
-  onSubmit() {
-  }
-} 
+  onSubmit() {}
+}
