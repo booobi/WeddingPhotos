@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PhotoInputComponent } from '../photo-input/photo-input.component';
 import { PhotoStore } from '../store/photo.store';
 import { FullpageNavigatorService } from '../services/fullpage-navigator.service';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-photo-submission',
@@ -14,11 +15,12 @@ import { FullpageNavigatorService } from '../services/fullpage-navigator.service
 export class PhotoSubmissionComponent implements OnInit {
   store = inject(PhotoStore);
   navigator = inject(FullpageNavigatorService);
+  firebaseService = inject(FirebaseService)
 
   ngOnInit(): void {}
 
-  onUpload(s: any) {
-    console.log({ s });
+  onUpload() {
+    this.firebaseService.uploadFile(this.store.stagedFiles()[0])
   }
 
   onSubmit() {}

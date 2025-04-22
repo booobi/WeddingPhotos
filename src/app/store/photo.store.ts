@@ -1,4 +1,4 @@
-import { computed, Injectable } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -6,6 +6,7 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { FirebaseService } from '../services/firebase.service';
 
 const MOCK_IMG_URLS = [
   'https://buffer.com/resources/content/images/2024/11/free-stock-image-sites.png',
@@ -39,7 +40,7 @@ export const PhotoStore = signalStore(
     stagedFileUrls: computed(() => stagedFiles().map(URL.createObjectURL)),
     hasStagedFiles: computed(() => !!stagedFiles().length),
   })),
-  withMethods((store) => ({
+  withMethods((store, firebase = inject(FirebaseService)) => ({
     stageFiles(files: File[]): void {
       patchState(store, { stagedFiles: [...store.stagedFiles(), ...files] });
     },
@@ -53,26 +54,36 @@ export const PhotoStore = signalStore(
     },
     uploadStagedFiles() {
       patchState(store, { isUploadingFiles: true });
-      setTimeout(() => {
-        patchState(store, {
-          isUploadingFiles: false,
-          stagedFiles: [],
-          uploadStatus: 'success',
+
+      firebase
+        .uploadFile(store.stagedFiles()[0])
+        .then((snapshot) => {
+          console.log('Uploaded a blob or file!', snapshot);
+          patchState(store, {
+            isUploadingFiles: false,
+            stagedFiles: [],
+            uploadStatus: 'success',
+          });
+        })
+        .catch((e) => {
+          patchState(store, {
+            isUploadingFiles: false,
+            stagedFiles: [],
+            uploadStatus: 'error',
+          });
         });
-      }, 2000);
     },
     getGalleryImages() {
       patchState(store, {
         isLoadingGalleryImages: true,
         galleryImageUrls: [],
       });
-
-      setInterval(() => {
+      firebase.getAllImages().then(imgUrls => {
         patchState(store, {
           isLoadingGalleryImages: false,
-          galleryImageUrls: [...store.galleryImageUrls(), ...MOCK_IMG_URLS],
+          galleryImageUrls: imgUrls,
         });
-      }, 2000);
-    }
+      })
+    },
   }))
 );
