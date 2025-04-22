@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhotoInputComponent } from '../photo-input/photo-input.component';
-import { PhotoInputStore } from '../photo-input/photo-input.store';
+import { PhotoStore } from '../store/photo.store';
 import { FullpageNavigatorService } from '../services/fullpage-navigator.service';
 
 @Component({
@@ -10,10 +10,9 @@ import { FullpageNavigatorService } from '../services/fullpage-navigator.service
   imports: [CommonModule, PhotoInputComponent],
   templateUrl: './photo-submission.component.html',
   styleUrls: ['./photo-submission.component.scss'],
-  providers: [PhotoInputStore],
 })
 export class PhotoSubmissionComponent implements OnInit {
-  store = inject(PhotoInputStore);
+  store = inject(PhotoStore);
   navigator = inject(FullpageNavigatorService);
 
   ngOnInit(): void {}

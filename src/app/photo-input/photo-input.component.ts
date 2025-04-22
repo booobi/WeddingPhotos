@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { fromEvent, merge, pipe, switchMap, tap } from 'rxjs';
-import { PhotoInputStore } from './photo-input.store';
+import { PhotoStore } from '../store/photo.store';
 import { CommonModule } from '@angular/common';
 import { StagedPhotoComponent } from './staged-photo/staged-photo.component';
 
@@ -22,7 +22,7 @@ import { StagedPhotoComponent } from './staged-photo/staged-photo.component';
   imports: [CommonModule, StagedPhotoComponent]
 })
 export class PhotoInputComponent implements OnInit {
-  store = inject(PhotoInputStore);
+  store = inject(PhotoStore);
 
   stageFilesSelectionEffect = rxMethod<void>(
     pipe(

@@ -5,9 +5,16 @@
   </div>
 </a>
 
+<p class="wedding-title">
+  Qna and Kiril's wedding
+</p>
+<p class="wedding-subtitle">
+  06.06.2025
+</p>
+
 <ngx-masonry [options]="masonryOptions">
   <div class="grid-sizer"></div>
-  <div ngxMasonryItem class="grid-item" *ngFor="let url of imageUrls">
+  <div ngxMasonryItem class="grid-item" *ngFor="let url of store.galleryImageUrls()">
     <img [src]="url">
   </div>
 </ngx-masonry>
