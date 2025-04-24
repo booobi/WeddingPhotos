@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -46,24 +46,35 @@ export const PhotoStore = signalStore(
     },
     uploadStagedFiles() {
       patchState(store, { isUploadingFiles: true });
+      const uploadPromises = store
+        .stagedFiles()
+        .map((stagedFile) => firebase.uploadFile(stagedFile));
 
-      firebase
-        .uploadFile(store.stagedFiles()[0])
-        .then((snapshot) => {
-          console.log('Uploaded a blob or file!', snapshot);
-          patchState(store, {
-            isUploadingFiles: false,
-            stagedFiles: [],
-            uploadStatus: 'success',
+        Promise.all(uploadPromises)
+          .then((snapshots) => {
+            console.log('Uploaded a blob or file!', snapshots);
+            (window as any).Toastify({
+              text: "Photos uploaded. See them in the gallery below",
+              duration: 3000,
+              gravity: "bottom",
+              position: "center", 
+              style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();
+            patchState(store, {
+              isUploadingFiles: false,
+              stagedFiles: [],
+              uploadStatus: 'success',
+            });
+          })
+          .catch((e) => {
+            patchState(store, {
+              isUploadingFiles: false,
+              stagedFiles: [],
+              uploadStatus: 'error',
+            });
           });
-        })
-        .catch((e) => {
-          patchState(store, {
-            isUploadingFiles: false,
-            stagedFiles: [],
-            uploadStatus: 'error',
-          });
-        });
     },
     getGalleryImages() {
       patchState(store, {

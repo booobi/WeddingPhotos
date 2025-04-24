@@ -1,3 +1,11 @@
+<swiper-container #swiperEl pagination="true" pagination-clickable="true" space-between="15" slides-per-view="auto" navigation="true">
+@for (imgUrl of store.stagedFileUrls(); track $index) {
+<swiper-slide style="width: fit-content;">
+  <img [src]="imgUrl" class="staged-image"/>
+</swiper-slide>
+}
+</swiper-container>
+
 <div class="btns-container">
   <button (click)="onFileSelectionTrigger()" class="button">
     <span class="icon">
@@ -12,23 +20,5 @@
   </button>
 </div>
 
-<input type="file" class="file-input" onclick="value = null" #fileInput>
-<input type="file" class="file-input" accept="image/*" capture #cameraInput>
-
-@if (store.hasStagedFiles()) {
-<p>Selected photo(s):</p>
-} @else {
-  @if(store.uploadStatus() === 'success') {
-    <p class="info-text has-text-success">
-      <i class="fa-solid fa-circle-check"></i>
-      Photos uploaded! Thank you! Feel free to upload more.
-    </p>    
-  }
-  @else {<p class="info-text">Select some photos to get started!</p>}
-}
-
-<swiper-container #swiperEl pagination="true" effect="coverflow" navigation="true">
-  @for (imgUrl of store.stagedFileUrls(); track $index) {
-  <swiper-slide><app-staged-photo [imageSrc]="imgUrl" (remove)="onPhotoRemove($index)" /></swiper-slide>
-  }
-</swiper-container>
+<input type="file" multiple="true" accept="image/*"  class="file-input" onclick="value = null" #fileInput>
+<input type="file" multiple="true" class="file-input" accept="image/*" capture #cameraInput>
