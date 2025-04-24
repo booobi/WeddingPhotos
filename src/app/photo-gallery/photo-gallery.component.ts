@@ -20,13 +20,19 @@ export class PhotoGalleryComponent implements OnInit {
     columnWidth: '.grid-sizer',
     // percentPosition: true
     gutter: 10,
+    // horizontalOrder: true
   }
 
   constructor() { }
 
   ngOnInit() {
     this.store.getGalleryImages();
+    console.log(this.store.galleryImageUrls);
 
+  }
+
+  trackByUrl(index: number, imgUrl: string) {
+    return imgUrl
   }
 
 }

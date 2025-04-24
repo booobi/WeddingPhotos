@@ -11,10 +11,31 @@ import {
 
 import { Injectable } from '@angular/core';
 
+function generateTimeSortableId() {
+  const PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
+
+  let now = new Date().getTime();
+
+  let timeStampChars = new Array(8);
+  for (let i = 7; i >= 0; i--) {
+    timeStampChars[i] = PUSH_CHARS.charAt(now % 64);
+    now = Math.floor(now / 64);
+  }
+
+  // Add 12 random characters to ensure uniqueness
+  let randomChars = '';
+  for (let i = 0; i < 12; i++) {
+    randomChars += PUSH_CHARS.charAt(Math.floor(Math.random() * 64));
+  }
+
+  return timeStampChars.join('') + randomChars;
+}
+
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
   app: any;
   storage: any;
+
   constructor() {
     const firebaseConfig = {
       apiKey: 'AIzaSyAKvwO0DnPurzni0Wfp97ASUrmqB5J_Cuo',
@@ -31,11 +52,11 @@ export class FirebaseService {
 
   uploadFile(blob: Blob) {
     const myRef = ref(this.storage, 'table2');
-    const deepRef = ref(myRef, Math.random().toString());
+    const deepRef = ref(myRef, generateTimeSortableId());
     return uploadBytes(deepRef, blob);
   }
 
-  private test(ref: StorageReference) {
+  private extractDownloadUrlsFromRef(ref: StorageReference) {
     const extractImageUrlsFromListResult = (list: ListResult) =>
       Promise.all(
         list.items.reduce(
@@ -58,7 +79,7 @@ export class FirebaseService {
           (prefix) => prefix.name
         );
         return Promise.all(tablesNames.reduce((re, tableName) =>
-          [...re, this.test(ref(rootRef, tableName))],[] as Promise<string[]>[] 
+          [...re, this.extractDownloadUrlsFromRef(ref(rootRef, tableName))],[] as Promise<string[]>[] 
         ));
       })
       .then(twoDArr => twoDArr.flat())

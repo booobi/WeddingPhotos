@@ -12,9 +12,9 @@
   06.06.2025
 </p>
 
-<ngx-masonry [options]="masonryOptions">
+<ngx-masonry [options]="masonryOptions" [ordered]="true">
   <div class="grid-sizer"></div>
-  <div ngxMasonryItem class="grid-item" *ngFor="let url of store.galleryImageUrls()">
+  <div ngxMasonryItem [prepend]="true" class="grid-item" *ngFor="let url of store.galleryImageUrls(); index as i; trackBy: trackByUrl" >
     <img [src]="url">
   </div>
 </ngx-masonry>
