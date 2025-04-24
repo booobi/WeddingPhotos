@@ -98,7 +98,7 @@ export const PhotoStore = signalStore(
             galleryImageUrls: imgUrls,
           });
         });
-      }, 5000);
+      }, 3000);
     },
   })
 );
