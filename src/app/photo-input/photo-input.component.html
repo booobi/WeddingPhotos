@@ -1,7 +1,7 @@
 <swiper-container #swiperEl pagination="true" pagination-clickable="true" space-between="15" slides-per-view="auto" navigation="true" centered-slides="true">
 @for (imgUrl of store.stagedFileUrls(); track $index) {
-<swiper-slide style="width: fit-content;">
-  <img [src]="imgUrl" class="staged-image"/>
+<swiper-slide>
+  <app-staged-photo [imageSrc]="imgUrl" (remove)="store.removeStagedFile($index)" />
 </swiper-slide>
 }
 </swiper-container>
