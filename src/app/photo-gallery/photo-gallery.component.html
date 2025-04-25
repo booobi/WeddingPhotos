@@ -14,7 +14,7 @@
 
 <ngx-masonry [options]="masonryOptions" [ordered]="true">
   <div class="grid-sizer"></div>
-  <div ngxMasonryItem [prepend]="true" class="grid-item" *ngFor="let url of store.galleryImageUrls(); index as i; trackBy: trackByUrl" >
-    <img [src]="url">
+  <div ngxMasonryItem [prepend]="true" class="grid-item" *ngFor="let url of store.galleryImageUrls()" >
+    <a [href]="url" data-lightbox="gallery"><img [src]="url"></a>
   </div>
 </ngx-masonry>

@@ -5,8 +5,31 @@ body {
     margin: 0 !important;
     background-color: #fff0f5;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    background: linear-gradient(
+    -45deg,
+    #fff0f5,   /* lavender blush */
+    #f0c0ff,   /* pastel lavender */
+    #ffd6e0,   /* light peachy pink */
+    #c1f5ff,   /* soft aqua */
+    #ffe2c5    /* warm pastel orange */
+  );
+  background-size: 400% 400%;
+  animation: gradient 12s ease-in-out infinite;
 }
 
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+#lightboxOverlay { position: fixed !important; top: 0; left: 0; height: 100% !important; width: 100% !important; }
+#lightbox { position: fixed !important; top: 50% !important; transform: translateY(-50%); }
+.lb-nav, .lb-dataContainer {
+    display: none !important;
+}
+  
 // sorry
 .fp-watermark {
 display: none;

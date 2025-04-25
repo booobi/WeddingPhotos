@@ -19,7 +19,7 @@ import { StagedPhotoComponent } from './staged-photo/staged-photo.component';
   styleUrls: ['./photo-input.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
-  imports: [CommonModule, StagedPhotoComponent]
+  imports: [CommonModule]
 })
 export class PhotoInputComponent implements OnInit {
   store = inject(PhotoStore);

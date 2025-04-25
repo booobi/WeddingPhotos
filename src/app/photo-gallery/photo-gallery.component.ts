@@ -4,7 +4,6 @@ import { FullpageNavigatorService } from '../services/fullpage-navigator.service
 import { NgxMasonryModule } from 'ngx-masonry';
 import { PhotoStore } from '../store/photo.store';
 
-
 @Component({
   selector: 'app-photo-gallery',
   templateUrl: './photo-gallery.component.html',
@@ -22,8 +21,6 @@ export class PhotoGalleryComponent implements OnInit {
     gutter: 10,
     // horizontalOrder: true
   }
-
-  constructor() { }
 
   ngOnInit() {
     this.store.getGalleryImages();

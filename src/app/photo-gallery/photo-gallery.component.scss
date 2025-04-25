@@ -34,16 +34,12 @@
 
     ngx-masonry {
         margin-top: 10px;
-
     }
 
     .grid-sizer,
     .grid-item {
-        
         transition: transform 0.4s ease, opacity 0.4s ease, translate 0.4s ease;
-        
         width: 48%;
-        /* Two columns */
     }
 
     .grid-item img {
