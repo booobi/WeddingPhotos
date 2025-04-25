@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^19.2.8",
     "@angular/platform-browser-dynamic": "^19.2.8",
     "@angular/router": "^19.2.8",
+    "@angular/service-worker": "^19.2.8",
     "@ngrx/signals": "^19.1.0",
     "firebase": "^11.6.0",
     "firebase-tools": "^14.2.1",
