@@ -4,9 +4,10 @@
   "dataGroups": [
     {
       "name": "firebase-images",
-      "urls": [
-        "https://firebasestorage.googleapis.com/**"
+      "patterns": [
+        "https:\\/\\/firebasestorage\\.googleapis\\.com\\/v0\\/b\\/wedding-photos-51e8c\\.firebasestorage\\.app\\/o\\/.*\\?alt=media.*"
       ],
+      "urls": [],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1d",

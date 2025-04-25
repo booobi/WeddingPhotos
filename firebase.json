@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/wedding-table-photos/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

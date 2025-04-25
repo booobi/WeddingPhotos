@@ -56,14 +56,23 @@ export class FirebaseService {
     return uploadBytes(deepRef, blob);
   }
 
+  private getCachedDownloadUrl(item: StorageReference) {
+    const cachedItemUrl = localStorage.getItem(item.name);
+    if (cachedItemUrl) {
+      return Promise.resolve(cachedItemUrl);
+    }
+    return getDownloadURL(item).then(url => {localStorage.setItem(item.name, url); return url});
+  }
+
   private extractDownloadUrlsFromRef(ref: StorageReference) {
     const extractImageUrlsFromListResult = (list: ListResult) =>
-      Promise.all(
+      {
+        return Promise.all(
         list.items.reduce(
-          (promises, item) => [...promises, getDownloadURL(item)],
+          (promises, item) => [...promises, this.getCachedDownloadUrl(item)],
           [] as Promise<string>[]
         )
-      );
+      )};
     return listAll(ref)
       .then((rootDirsListRef) => {
         console.log({ rootDirsListRef });
