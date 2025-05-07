@@ -8,6 +8,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { FirebaseService } from '../services/firebase.service';
+import {resizeImage, showToast } from './store.utils';
 
 export interface PhotoState {
   // photo input
@@ -46,22 +47,19 @@ export const PhotoStore = signalStore(
     },
     uploadStagedFiles() {
       patchState(store, { isUploadingFiles: true });
-      const uploadPromises = store
+      
+      const thumbnailsUploadPromises = store
         .stagedFiles()
-        .map((stagedFile) => firebase.uploadFile(stagedFile));
+        .map(stagedFile => resizeImage({file: stagedFile, maxSize: 512}))
+        .map((rezisedStagedFilePromise) => rezisedStagedFilePromise.then(resizedStagedFile => firebase.uploadFile(resizedStagedFile, 'thumbs')));
 
-        Promise.all(uploadPromises)
+        const imageUploadPromises = store
+        .stagedFiles()
+        .map(stagedFile => firebase.uploadFile(stagedFile, 'images'));
+
+        Promise.all([...thumbnailsUploadPromises, ...imageUploadPromises])
           .then((snapshots) => {
-            console.log('Uploaded a blob or file!', snapshots);
-            (window as any).Toastify({
-              text: "Photos uploaded. See them in the gallery below",
-              duration: 3000,
-              gravity: "bottom",
-              position: "center", 
-              style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-              },
-            }).showToast();
+            showToast("Photos uploaded. See them in the gallery below", 'success');
             patchState(store, {
               isUploadingFiles: false,
               stagedFiles: [],
@@ -69,6 +67,7 @@ export const PhotoStore = signalStore(
             });
           })
           .catch((e) => {
+            showToast("There was a problem uploading the photos.", 'error',);
             patchState(store, {
               isUploadingFiles: false,
               stagedFiles: [],
@@ -82,6 +81,7 @@ export const PhotoStore = signalStore(
         galleryImageUrls: [],
       });
       firebase.getAllImages().then((imgUrls) => {
+        console.log('test', {imgUrls})
         patchState(store, {
           isLoadingGalleryImages: false,
           galleryImageUrls: imgUrls,

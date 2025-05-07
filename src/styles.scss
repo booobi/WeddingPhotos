@@ -24,7 +24,20 @@ body {
 
 #lightboxOverlay { position: fixed !important; top: 0; left: 0; height: 100% !important; width: 100% !important; }
 #lightbox { position: fixed !important; top: 50% !important; transform: translateY(-50%); }
-.lb-nav, .lb-details {
+
+.lb-nav {
+  display: flex;
+  // first image is counted as 'last'
+  // hack reverse controls
+  flex-flow: row-reverse;
+  .lb-prev {
+    width: 64%;
+  }
+  .lb-next {
+    width: 34%;
+  }
+}
+.lb-details {
     display: none !important;
 }
 .lb-dataContainer {

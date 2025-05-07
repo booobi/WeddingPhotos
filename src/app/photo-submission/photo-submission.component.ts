@@ -19,9 +19,5 @@ export class PhotoSubmissionComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onUpload() {
-    this.firebaseService.uploadFile(this.store.stagedFiles()[0])
-  }
-
   onSubmit() {}
 }

@@ -50,8 +50,8 @@ export class FirebaseService {
     this.storage = getStorage(this.app);
   }
 
-  uploadFile(blob: Blob) {
-    const myRef = ref(this.storage, 'table2');
+  uploadFile(blob: Blob, destinationDirName: string) {
+    const myRef = ref(this.storage, destinationDirName);
     const deepRef = ref(myRef, generateTimeSortableId());
     return uploadBytes(deepRef, blob);
   }
@@ -82,15 +82,6 @@ export class FirebaseService {
 
   getAllImages() {
     const rootRef = ref(this.storage);
-    return listAll(rootRef)
-      .then((rootDirsListRef) => {
-        const tablesNames = rootDirsListRef.prefixes.map(
-          (prefix) => prefix.name
-        );
-        return Promise.all(tablesNames.reduce((re, tableName) =>
-          [...re, this.extractDownloadUrlsFromRef(ref(rootRef, tableName))],[] as Promise<string[]>[] 
-        ));
-      })
-      .then(twoDArr => twoDArr.flat())
+    return this.extractDownloadUrlsFromRef(ref(rootRef, 'thumbs'));
   }
 }
