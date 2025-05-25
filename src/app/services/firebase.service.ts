@@ -75,7 +75,6 @@ export class FirebaseService {
       )};
     return listAll(ref)
       .then((rootDirsListRef) => {
-        console.log({ rootDirsListRef });
         return extractImageUrlsFromListResult(rootDirsListRef);
       })
   }

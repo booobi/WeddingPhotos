@@ -5,7 +5,6 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { register } from 'swiper/element/bundle';
-import { provideServiceWorker } from '@angular/service-worker';
 
 // TODO: in app initializer
 // register Swiper custom elements
@@ -17,9 +16,5 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(), 
-    // provideServiceWorker('ngsw-worker.js', {
-    //         enabled: !isDevMode(),
-    //         registrationStrategy: 'registerWhenStable:30000'
-    //       }),
   ],
 };

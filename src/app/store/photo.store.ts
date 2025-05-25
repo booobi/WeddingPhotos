@@ -50,7 +50,7 @@ export const PhotoStore = signalStore(
       
       const thumbnailsUploadPromises = store
         .stagedFiles()
-        .map(stagedFile => resizeImage({file: stagedFile, maxSize: 512}))
+        .map(stagedFile => resizeImage({file: stagedFile, maxSize: 1024}))
         .map((rezisedStagedFilePromise) => rezisedStagedFilePromise.then(resizedStagedFile => firebase.uploadFile(resizedStagedFile, 'thumbs')));
 
         const imageUploadPromises = store
@@ -81,7 +81,6 @@ export const PhotoStore = signalStore(
         galleryImageUrls: [],
       });
       firebase.getAllImages().then((imgUrls) => {
-        console.log('test', {imgUrls})
         patchState(store, {
           isLoadingGalleryImages: false,
           galleryImageUrls: imgUrls,

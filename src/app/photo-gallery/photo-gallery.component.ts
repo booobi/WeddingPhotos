@@ -24,8 +24,6 @@ export class PhotoGalleryComponent implements OnInit {
 
   ngOnInit() {
     this.store.getGalleryImages();
-    console.log(this.store.galleryImageUrls);
-
   }
 
   trackByUrl(index: number, imgUrl: string) {
