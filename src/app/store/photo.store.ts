@@ -59,7 +59,7 @@ export const PhotoStore = signalStore(
 
         Promise.all([...thumbnailsUploadPromises, ...imageUploadPromises])
           .then((snapshots) => {
-            showToast("Photos uploaded. See them in the gallery below", 'success');
+            showToast("Снимките са качени! Може да ги видите в галерията.", 'success');
             patchState(store, {
               isUploadingFiles: false,
               stagedFiles: [],
@@ -67,7 +67,7 @@ export const PhotoStore = signalStore(
             });
           })
           .catch((e) => {
-            showToast("There was a problem uploading the photos.", 'error',);
+            showToast("Възникна проблем с качването на снимки. Моля опитайте отново", 'error',);
             patchState(store, {
               isUploadingFiles: false,
               stagedFiles: [],

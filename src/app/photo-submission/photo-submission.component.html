@@ -1,15 +1,18 @@
 <div class="container">
-  <h1>Share Your Wedding Pics!</h1>
-  <p>Upload a photo for the happy couple to cherish forever 💖</p>
+  <!-- <h1>Share Your Wedding Pics!</h1> -->
+   <h1>Споделете сватбените моменти!</h1>
+  <!-- <p>Upload a photo for the happy couple to cherish forever 💖</p> -->
+   <p>Качете снимки за спомен на щастливата двойка 💖</p>
+   
   <app-photo-input />
   @if (store.hasStagedFiles()) {
   <button class="button is-primary"  [class.is-loading]="store.isUploadingFiles()"
-    (click)="store.uploadStagedFiles()">{{store.isUploadingFiles() ? 'Uploading...' : 'Upload selected photos'}}</button>
+    (click)="store.uploadStagedFiles()">{{store.isUploadingFiles() ? 'Uploading...' : 'Качи избраните снимки'}}</button>
   }
 
 <a class="is-text" (click)="navigator.navigateDown()">
   <div class="to-gallery-button">
-    <span>To Photo Gallery</span>
+    <span>Към галерия</span>
     <i class="fa-solid fa-arrow-down"></i>
   </div>
 </a>

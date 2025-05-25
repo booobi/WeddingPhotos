@@ -1,0 +1,31 @@
+[debug] [2025-05-25T13:00:14.780Z] ----------------------------------------------------------------------
+[debug] [2025-05-25T13:00:14.782Z] Command:       /usr/local/bin/node /Users/borismarkov/Work/wedding-table-photos/node_modules/.bin/firebase deploy
+[debug] [2025-05-25T13:00:14.782Z] CLI Version:   14.2.1
+[debug] [2025-05-25T13:00:14.782Z] Platform:      darwin
+[debug] [2025-05-25T13:00:14.782Z] Node Version:  v20.11.1
+[debug] [2025-05-25T13:00:14.782Z] Time:          Sun May 25 2025 16:00:14 GMT+0300 (Eastern European Summer Time)
+[debug] [2025-05-25T13:00:14.782Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-25T13:00:14.881Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-25T13:00:14.881Z] > authorizing via signed-in user (bvlmarkov@gmail.com)
+[debug] [2025-05-25T13:00:14.881Z] [iam] checking project wedding-photos-51e8c for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-05-25T13:00:14.881Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:14.882Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:14.882Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/wedding-photos-51e8c:testIamPermissions [none]
+[debug] [2025-05-25T13:00:14.882Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/wedding-photos-51e8c:testIamPermissions x-goog-quota-user=projects/wedding-photos-51e8c
+[debug] [2025-05-25T13:00:14.882Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/wedding-photos-51e8c:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-05-25T13:00:15.836Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/wedding-photos-51e8c:testIamPermissions 200
+[debug] [2025-05-25T13:00:15.836Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/wedding-photos-51e8c:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-05-25T13:00:15.837Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:15.837Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:15.838Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/wedding-photos-51e8c [none]
+[debug] [2025-05-25T13:00:16.149Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/wedding-photos-51e8c 200
+[debug] [2025-05-25T13:00:16.149Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/wedding-photos-51e8c {"projectId":"wedding-photos-51e8c","projectNumber":"988703399995","displayName":"wedding-photos","name":"projects/wedding-photos-51e8c","resources":{"hostingSite":"wedding-photos-51e8c"},"state":"ACTIVE","etag":"1_86d464ef-e457-4de2-b264-0dc08121b5c8"}
+[info] 
+[info] === Deploying to 'wedding-photos-51e8c'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-05-25T13:00:16.153Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:16.153Z] Checked if tokens are valid: true, expires at: 1748179227832
+[debug] [2025-05-25T13:00:16.153Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/wedding-photos-51e8c/versions [none]
+[debug] [2025-05-25T13:00:16.153Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/wedding-photos-51e8c/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
